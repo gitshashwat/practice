@@ -1,0 +1,26 @@
+https://leetcode.com/problems/perfect-squares
+
+import math
+class Solution:
+    def numSquares(self, n: int) -> int:
+        
+        #Step1: Check if the number is a perfect square or not. If yes, it can be computed in 1 step
+        if math.floor(sqrt(n)) == math.ceil(sqrt(n)):
+            return 1
+        
+        #Step2: Acc to legendre's theorem, a number that is of the form 4^a (8b + 7) can be represented as squares of 4 numbers
+        while(n%4==0):
+            n = n//4
+        
+        if n%8==7:
+            return 4
+  
+        #Step3: We try to have one break-point between the number, ie., if the number is a sum of two perfect squares. 
+        for i in range(1,n):
+            if i*i <=n:
+                if math.floor(sqrt(n-(i*i))) == math.ceil(sqrt(n-(i*i))):
+                    return 2
+        #Else 3
+        return 3
+            
+            
